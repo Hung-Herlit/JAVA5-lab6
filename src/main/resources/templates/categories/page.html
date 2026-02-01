@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Category List</h1>
+    <form action="/categories/create" method="post">
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" required />
+        <br />
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+        <br />
+        <button type="submit">Add Category</button>
+    </form>
+    <hr />
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="category : ${page.content}">
+                <td th:text="${category.id}">Category ID</td>
+                <td th:text="${category.name}">Category Name</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <span th:text="'Page ' + ${page.number + 1} + ' of ' + ${page.totalPages}">Page Info</span>
+        <div>
+            <a th:if="${page.hasPrevious()}" th:href="@{/categories/page(page=${page.number - 1})}">Previous</a>
+            <a th:if="${page.hasNext()}" th:href="@{/categories/page(page=${page.number + 1})}">Next</a>
+        </div>
+    </div>
+</body>
+
+</html>
