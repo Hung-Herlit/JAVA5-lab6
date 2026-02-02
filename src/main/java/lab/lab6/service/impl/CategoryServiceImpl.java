@@ -60,7 +60,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Page<Category> getCategoriesPaginated(Pageable pageable) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCategoriesPaginated'");
+        return categoryRepository.findAll(pageable);
     }
+
+    
 }
